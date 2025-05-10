@@ -22,19 +22,20 @@ export const SignupAPI = async (AuthData) => {
     }
   };
 
-export const LoginAPI=async(AuthData)=>{
-   try{
-    const res=await axios.post(`${BASE_URL}/BugHound/user/login`,AuthData,{
-        headers:{
-            'Content-Type':'application/json'
-        },
-        withCredentials: true, 
-    })
-    return res.data
-   }catch(err){
-    console.log("Error",err)
-   }
-}
+export const LoginAPI = async (AuthData) => {
+  try {
+    const res = await axios.post(`${BASE_URL}/BugHound/user/login`, AuthData, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true,
+    });
+    return res.data;
+  } catch (err) {
+    console.error("LoginAPI error:", err?.response?.data || err.message);
+    throw err; 
+  }
+};
 
 export const UpdateUserAPI=async(id,AuthData)=>{
     try{
