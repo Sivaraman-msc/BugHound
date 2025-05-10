@@ -34,13 +34,11 @@ export default function Login() {
 
   const onSubmit = async () => {
     try {
-      if (res && res.user) {
-        await login(res.user);
-        setmessage('Login Successful!');
-        setError(false);
-      } else {
-        throw new Error("User data missing in response");
-      }
+      const res = await LoginAPI(formdata);
+      console.log("Login successful:", res);
+      await login(res.user);
+      setmessage('Login Successful!');
+      setError(false);
     } catch (err) {
       console.error("Error during login:", err.response || err.message);
       setmessage('Login Error');
