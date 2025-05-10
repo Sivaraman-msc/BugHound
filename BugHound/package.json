@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
-    "cloudinary": "^2.6.0",
+    "cloudinary": "^1.41.3",
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
