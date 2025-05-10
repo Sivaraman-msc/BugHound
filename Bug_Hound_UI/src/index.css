@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.loginGradientBtn {
+  background-image: linear-gradient(to right, #4f46e5, #3b82f6);
+}
+
+.loginGradientBtn:hover {
+  background-image: linear-gradient(to right, #3b82f6, #4f46e5);
+}
+.ck-editor__editable_inline {
+  min-height: 200px;
+  max-width: auto;
+}

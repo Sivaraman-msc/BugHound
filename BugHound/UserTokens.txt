@@ -1,0 +1,15 @@
+Sivaraman (Developer) : 6806514e1c970a08b476fd19 , 
+Angelina (PM) : 68066284b6b7caf4c412b99b ,
+Jennifer (Tester) : 6806622cb6b7caf4c412b998 , 
+
+https://res.cloudinary.com/dotudwq8w/image/upload/c_crop,w_200,h_200/v1745563690/uploads/hzbh3hq1qb4hpokyq3mf.jpg
+
+cloud_name: dotudwq8w
+
+folder: uploads
+
+file: hzbh3hq1qb4hpokyq3mf.jpg
+
+transformation: c_crop,w_200,h_200
+
+version: v1745563690
