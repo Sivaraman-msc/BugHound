@@ -1,10 +1,10 @@
 import axios from "axios"
 
-const BASE_URL='http://localhost:3000/BugHound/Comment'
+const BASE_URL='https://bughound-g7ms.onrender.com'
 
 export const NewCommentAPI = async (CommentData) => {
     try {
-        const res = await axios.post(`${BASE_URL}/createComment`, CommentData, {
+        const res = await axios.post(`${BASE_URL}/Bughound/Comment/createComment`, CommentData, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -19,7 +19,7 @@ export const NewCommentAPI = async (CommentData) => {
 
 export const GetCommentAPI=async()=>{
     try{
-        const res=await axios.get(`${BASE_URL}/getComment`,{withCredentials:true})
+        const res=await axios.get(`${BASE_URL}/Bughound/Comment/getComment`,{withCredentials:true})
     return res.data
     }catch(err){
         console.log(err)
@@ -29,7 +29,7 @@ export const GetCommentAPI=async()=>{
 
 export const GetCommentByAPI=async(id)=>{
     try{
-        const res=await axios.get(`${BASE_URL}/getCommentbyid/${id}`,{withCredentials:true})
+        const res=await axios.get(`${BASE_URL}/Bughound/Comment/getCommentbyid/${id}`,{withCredentials:true})
         return res.data
     }catch(err){
         console.log(err)
@@ -39,7 +39,7 @@ export const GetCommentByAPI=async(id)=>{
 
 export const DeleteComment = async (id) => {
     try {
-      const res = await axios.delete(`${BASE_URL}/deleteComment/${id}`, {
+      const res = await axios.delete(`${BASE_URL}/Bughound/Comment/deleteComment/${id}`, {
         withCredentials: true,
       });
       return res.data;

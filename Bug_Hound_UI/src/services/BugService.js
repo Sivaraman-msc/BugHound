@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL='http://localhost:3000/BugHound/bug'
+const BASE_URL='https://bughound-g7ms.onrender.com'
 
 
 export const CreateBugAPI = async (bugData) => {
@@ -10,7 +10,7 @@ export const CreateBugAPI = async (bugData) => {
       formData.append(key, bugData[key]);
     }
 
-    const res = await axios.post(`${BASE_URL}/create`, formData, {
+    const res = await axios.post(`${BASE_URL}/BugHound/bug/create`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -26,7 +26,7 @@ export const CreateBugAPI = async (bugData) => {
 
   export const UpdateBugAPI = async (id, status) => {
     try {
-      const res = await axios.patch(`${BASE_URL}/updatebug/${id}`, { status }, {
+      const res = await axios.patch(`${BASE_URL}/BugHound/bug/updatebug/${id}`, { status }, {
         withCredentials: true
       });
       return res.data;
@@ -38,7 +38,7 @@ export const CreateBugAPI = async (bugData) => {
 
   export const GetBugAPI = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/getbug`, { withCredentials: true });
+      const res = await axios.get(`${BASE_URL}/BugHound/bug/getbug`, { withCredentials: true });
       console.log(" GetBugAPI axios response:", res);
       return res.data;
     } catch (err) {
@@ -49,7 +49,7 @@ export const CreateBugAPI = async (bugData) => {
 
 export const GetBugByIdAPI = async (id) => {
     try {
-      const res = await axios.get(`${BASE_URL}/getbugbyid/${id}`,{ withCredentials: true });
+      const res = await axios.get(`${BASE_URL}/BugHound/bug/getbugbyid/${id}`,{ withCredentials: true });
       return res.data;
     } catch (err) {
       console.log("GetBugByIdAPI error:", err.response?.data || err.message);
@@ -59,7 +59,7 @@ export const GetBugByIdAPI = async (id) => {
 
   export const BugStatAPI=async()=>{
     try{
-      const res=await axios.get(`${BASE_URL}/bugStat`,{withCredentials:true})
+      const res=await axios.get(`${BASE_URL}/BugHound/bug/bugStat`,{withCredentials:true})
       return res.data
     }catch(err){
       console.log("BugStat Api Err : ",err.response?.data || err.message)
@@ -69,7 +69,7 @@ export const GetBugByIdAPI = async (id) => {
 
   export const BugConditionAPI=async()=>{
     try{
-      const res=await axios.get(`${BASE_URL}/bugCondition`,{withCredentials:true})
+      const res=await axios.get(`${BASE_URL}/BugHound/bug/bugCondition`,{withCredentials:true})
       return res.data
     }catch(err){
       console.log("Bug Condition Err : ",err)
