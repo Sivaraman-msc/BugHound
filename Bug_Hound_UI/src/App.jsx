@@ -19,7 +19,7 @@ import Help from './pages/Help';
 function App() {
 
   useEffect(() => {
-    fetch('http://localhost:3000/test')  
+    fetch('https://bughound-g7ms.onrender.com/test')  
       .then(res => res.json())
       .then(data => console.log(data))
       .catch(err => console.error('Error connecting:', err));
