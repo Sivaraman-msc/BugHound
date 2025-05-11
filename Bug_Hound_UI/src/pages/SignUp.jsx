@@ -131,13 +131,27 @@ export default function SignUp() {
             <p className="text-red-600">{errors.role?.message}</p>
 
             <label className="block text-gray-600 font-semibold mb-1 tracking-wide">Image</label>
-            <input
-              type="file"
-              {...register('profile')}
-              name="profile"
-              onChange={handleChange}
-              className="mb-4"
-            />
+            <div className="mb-4">
+              <div className="flex items-center space-x-4">
+                <label
+                  htmlFor="profile"
+                  className="cursor-pointer px-2 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition-all">
+                  Choose File
+                </label>
+                <span className="text-sm text-gray-600">
+                  {formdata?.profile?.name || 'No file chosen'}
+                </span>
+              </div>
+              <input
+                id="profile"
+                type="file"
+                {...register('profile')}
+                name="profile"
+                onChange={handleChange}
+                className="hidden"
+                accept="image/*"
+              />
+            </div>
             <p className="text-red-600">{errors.profile?.message}</p>
 
             <button
