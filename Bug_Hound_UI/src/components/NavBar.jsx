@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/leoTech.jfif.png';
+import logo from '../assets/leoTech.png';
 import UseAuth from '../hooks/useAuth';
 import { HiOutlineMenu } from 'react-icons/hi';
 

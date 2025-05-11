@@ -7,7 +7,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const compression = require('compression')
 const cookieParser = require('cookie-parser')
-//const rateLimit=require('express-rate-limit')
+const rateLimit=require('express-rate-limit')
 require('dotenv').config()
   
 const app = express()
@@ -16,15 +16,15 @@ DbConnect()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })) 
 app.use(cookieParser()) 
-app.use(cors({origin : "https://bug-hound-88g7.vercel.app",credentials:true}))
+app.use(cors({origin : "http://localhost:5173",credentials:true}))
 app.use(morgan('dev')) 
 app.use(compression())
-/*const limit=rateLimit({
+const limit=rateLimit({
   windowMs:15*60*1000,
   max:10,
   message:"Too many requests, please try again later"
 })
-app.use(limit)*/
+app.use(limit)
 app.use('/uploads', express.static("uploads"))
 app.use('/BugHound/bug', BugRouter)
 app.use('/BugHound/user', UserRouter)

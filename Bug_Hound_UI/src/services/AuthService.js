@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASE_URL='https://bughound-g7ms.onrender.com'
+const BASE_URL='http://localhost:3000/BugHound/user'
 
 export const SignupAPI = async (AuthData) => {
     try {
@@ -9,7 +9,7 @@ export const SignupAPI = async (AuthData) => {
         data.append(key, AuthData[key]);
       }
   
-      const res = await axios.post(`${BASE_URL}/BugHound/user/signup`, data, {
+      const res = await axios.post(`${BASE_URL}/signup`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -22,24 +22,23 @@ export const SignupAPI = async (AuthData) => {
     }
   };
 
-export const LoginAPI = async (AuthData) => {
-  try {
-    const res = await axios.post(`${BASE_URL}/BugHound/user/login`, AuthData, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      withCredentials: true,
-    });
-    return res.data;
-  } catch (err) {
-    console.error("LoginAPI error:", err?.response?.data || err.message);
-    throw err; 
-  }
-};
+export const LoginAPI=async(AuthData)=>{
+   try{
+    const res=await axios.post(`${BASE_URL}/login`,AuthData,{
+        headers:{
+            'Content-Type':'application/json'
+        },
+        withCredentials: true, 
+    })
+    return res.data
+   }catch(err){
+    console.log("Error",err)
+   }
+}
 
 export const UpdateUserAPI=async(id,AuthData)=>{
     try{
-        const res=await axios.put(`${BASE_URL}/BugHound/user/updateUser/${id}`,AuthData)
+        const res=await axios.put(`${BASE_URL}/updateUser/${id}`,AuthData)
     return res.data
     }catch(err){
         console.log("error",err)
@@ -48,7 +47,7 @@ export const UpdateUserAPI=async(id,AuthData)=>{
 
 export const getUsersAPI = async () => {
   try {
-    const res = await axios.get(`${BASE_URL}/BugHound/user/getUsers`, { withCredentials: true });
+    const res = await axios.get(`${BASE_URL}/getUsers`, { withCredentials: true });
     console.log("Axios Response:", res);        
     console.log("Axios Response Data:", res.data);
     return res.data;
@@ -60,7 +59,7 @@ export const getUsersAPI = async () => {
 
 export const GetUserByIdAPI=async(id)=>{
    try{
-    const res=await axios.get(`${BASE_URL}/BugHound/user/getuserbyid/${id}`)
+    const res=await axios.get(`${BASE_URL}/getuserbyid/${id}`)
     return res.data
    }catch(err){
     console.log("Error",err)

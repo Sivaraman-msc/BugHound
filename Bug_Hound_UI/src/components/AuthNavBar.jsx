@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/leoTech.jfif.png';
+import logo from '../assets/leoTech.png';
 import { HiOutlineMenu } from 'react-icons/hi';
 
 export default function AuthNavBar({ variant = 'login' }) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
+import LeoTech from '../assets/LeoTech.png';
 
 export default function Help() {
     const navigate=useNavigate()
@@ -27,6 +28,7 @@ export default function Help() {
   return (
     <>
     <div className='bg-gray-100 min-h-screen'>
+      <img src={LeoTech} className='w-40 mx-auto my-6' />
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 lg:px-20'>
         {showHead.map((title, index) => {

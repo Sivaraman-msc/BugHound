@@ -33,22 +33,18 @@ export default function Login() {
   }
 
   const onSubmit = async () => {
-  try {
-    const res = await LoginAPI(formdata);
-
-    if (!res || !res.user) {
-      throw new Error("Login failed or invalid response from server");
+    try {
+      const res = await LoginAPI(formdata);
+      console.log("Login successful:", res);
+      await login(res.user);
+      setmessage('Login Successful!');
+      setError(false);
+    } catch (err) {
+      console.error("Error during login:", err.response || err.message);
+      setmessage('Login Error');
+      setError('Invalid credentials');
     }
-
-    await login(res.user);
-    setmessage('Login Successful!');
-    setError(false);
-  } catch (err) {
-    console.error("Error during login:", err.response?.data || err.message);
-    setmessage('Login Error');
-    setError('Invalid credentials');
-  }
-};
+  };
 
   useEffect(() => {
     if (user) {
