@@ -14,7 +14,7 @@ export default function BugForm() {
   const [formdata, setFormdata] = useState({
     title: '',
     description: '',
-    status: 'open', 
+    status: 'open',
     priority: '',
     assignedTo: '',
     screenshot: null
@@ -29,20 +29,20 @@ export default function BugForm() {
     resolver: yupResolver(BugFormValidation)
   });
 
- useEffect(() => {
-  const fetchUsers = async () => {
-    try {
-      const users = await getUsersAPI(); 
-      console.log("Fetched users:", users);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const users = await getUsersAPI();
+        console.log("Fetched users:", users);
 
-      const devs = users.filter(user => user.role === 'Developer');
-      setUsers(devs || []);
-    } catch (err) {
-      console.error("Error fetching users:", err);
-    }
-  };
-  fetchUsers();
-}, []);
+        const devs = users.filter(user => user.role === 'Developer');
+        setUsers(devs || []);
+      } catch (err) {
+        console.error("Error fetching users:", err);
+      }
+    };
+    fetchUsers();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -84,8 +84,8 @@ export default function BugForm() {
       <NavBar />
       <div className="min-h-screen mt-1 flex ">
         <SideNav />
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-12 w-full">
-          <div className="bg-white p-10 rounded-lg shadow-xl w-full max-w-2xl">
+        <div className="min-h-screen flex items-center justify-center px-4 w-full">
+          <div className="bg-white p-7 rounded-lg shadow-xl w-full max-w-2xl">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" encType="multipart/form-data">
               {error && <p className="text-red-500 text-center">{error}</p>}
 
@@ -163,22 +163,30 @@ export default function BugForm() {
                 <p className="text-red-500">{errors.assignedTo?.message}</p>
               </div>
 
-              <div>
+              <div className="mb-4">
                 <label className="block text-gray-700 font-semibold mb-1">Screenshot</label>
+                <label
+                  htmlFor="screenshot"
+                  className="cursor-pointer inline-block px-4 py-2 bg-gray-600 text-white rounded-lg shadow hover:bg-gray-700 transition-all"
+                >
+                  Choose File
+                </label>
+
                 <input
+                  id="screenshot"
                   type="file"
                   name="screenshot"
                   accept="image/*"
                   onChange={handleChange}
-                  className="w-full text-gray-700"
+                  className="hidden"
                 />
-                <p className="text-red-500">{errors.screenshot?.message}</p>
+
+                <p className="text-red-500 mt-1 text-sm">{errors?.screenshot?.message}</p>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 text-white font-semibold rounded shadow-md mt-6 transition-all duration-300"
-                style={{ backgroundImage: 'linear-gradient(to right, #4f46e5, #3b82f6)' }}
+                className="w-full py-3 text-white font-semibold rounded shadow-md mt-6 transition-all duration-300 loginGradientBtn"
               >
                 Submit Bug
               </button>

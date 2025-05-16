@@ -76,11 +76,11 @@ export default function BugUpdate() {
   return (
     <>
       <NavBar />
-      <div className="min-h-screen mt-1 flex bg-gray-100">
+      <div className="min-h-screen mt-1 flex ">
         <SideNav />
         <div className="flex-1 p-4 sm:p-8">
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-12 w-full">
-          <div className="bg-white p-10 rounded-lg shadow-xl w-full max-w-2xl">
+        <div className="min-h-screen flex items-center justify-center px-4 py-12 w-full">
+          <div className="bg-white p-10 rounded-lg shadow-xl w-full max-w-2xl -mt-25">
             <form onSubmit={handleSubmit(onSubmit, (errors) => console.log("Validation Errors:", errors))}>
               {error && <p className="text-red-500 text-center">{error}</p>}
 

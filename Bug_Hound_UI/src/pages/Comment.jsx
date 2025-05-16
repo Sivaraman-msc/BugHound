@@ -87,9 +87,9 @@ export default function Comment() {
   return (
     <>
       <NavBar />
-      <div className="min-h-screen mt-1 flex bg-gray-100">
+      <div className="min-h-screen mt-1 flex ">
         <SideNav />
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-12 w-full">
+        <div className="min-h-screen flex items-center justify-center px-4 w-full">
           <div className="bg-white p-10 rounded-lg shadow-xl w-full max-w-2xl">
             <form onSubmit={handleSubmit(OnSubmit)} className="space-y-4">
               {error && <p>{error}</p>}
@@ -138,8 +138,7 @@ export default function Comment() {
               </div>
               <button
                 type="submit"
-                className="w-full py-3 text-white font-semibold rounded shadow-md mt-6 transition-all duration-300"
-                style={{ backgroundImage: 'linear-gradient(to right, #4f46e5, #3b82f6)' }}
+                className="w-full py-3 text-white font-semibold rounded shadow-md mt-6 transition-all duration-300 loginGradientBtn"
               >
                 Submit Comment
               </button>

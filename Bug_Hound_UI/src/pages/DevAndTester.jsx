@@ -33,7 +33,7 @@ export default function DevAndTester() {
   return (
     <>
       <NavBar />
-      <div className="min-h-screen mt-1 flex bg-gray-100">
+      <div className="min-h-screen mt-1 flex ">
         <SideNav />
         <main className="flex-1 p-4 sm:p-6 overflow-auto">
           {error && <p className="text-red-600 mb-4">{error}</p>}

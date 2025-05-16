@@ -135,7 +135,7 @@ export default function SignUp() {
               <div className="flex items-center space-x-4">
                 <label
                   htmlFor="profile"
-                  className="cursor-pointer px-2 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition-all">
+                  className="cursor-pointer px-2 py-2 bg-gray-400 text-white rounded-lg shadow hover:bg-gray-700 transition-all">
                   Choose File
                 </label>
                 <span className="text-sm text-gray-600">

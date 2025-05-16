@@ -39,7 +39,7 @@ export default function CommentList() {
   return (
     <>
       <NavBar />
-      <div className="flex min-h-screen bg-gray-100">
+      <div className="flex min-h-screen">
         <SideNav />
         <main className="flex-1 p-4 sm:p-6 overflow-auto">
           {error && <p className="text-red-600 mb-4">{error}</p>}
@@ -85,8 +85,7 @@ export default function CommentList() {
                       <td className="px-4 py-2 border-b">
                         <button
                           onClick={() => handleDelete(comment._id)}
-                           className="w-20 py-3 text-white font-semibold rounded shadow-md transition-all duration-300"
-                style={{ backgroundImage: 'linear-gradient(to right,rgb(229, 70, 70),rgb(241, 29, 29))' }}
+                           className="w-20 py-3 text-white font-semibold rounded shadow-md transition-all duration-300 loginGradientBtn"
                         >
                           Delete
                         </button>
