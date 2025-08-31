@@ -1,153 +1,135 @@
-import React, { useEffect, useState } from 'react'
-import NavBar from '../components/NavBar'
-import SideNav from '../components/SideNav'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import NavBar from '../components/NavBar';
+import SideNav from '../components/SideNav';
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CommentValidation } from '../utils/Yup';
 import { NewCommentAPI } from '../services/CommentService';
-import { useNavigate } from 'react-router-dom';
 import { getUsersAPI } from '../services/AuthService';
 import { GetBugAPI } from '../services/BugService';
 
 export default function Comment() {
-  const [formdata, setformData] = useState({
-  bugId: '',
-  to: '',
-  content: ''
-});
-  const [users, setUsers] = useState([])
-  const [bug, setBug] = useState([])
-  const [error, setError] = useState(false)
-  const [message, setMessage] = useState('')
+  const [formdata, setFormdata] = useState({
+    bugId: '',
+    to: '',
+    content: ''
+  });
+  const [users, setUsers] = useState([]);
+  const [bugs, setBugs] = useState([]);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
   const { register, handleSubmit, setValue, formState: { errors } } = useForm({
     resolver: yupResolver(CommentValidation)
-  })
-  const navigate = useNavigate()
+  });
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-      const users = await getUsersAPI(); 
-      console.log("Fetched users:", users);
-
-      const devs = users.filter(user => user.role === 'Developer' || user.role === 'Tester');
-      setUsers(devs || []);
-    } catch (err) {
-      console.error("Error fetching users:", err);
-    }
-    }
-    fetchUsers()
-  }, [])
+        const allUsers = await getUsersAPI();
+        setUsers(allUsers.filter(u => u.role === 'Developer' || u.role === 'Tester') || []);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchUsers();
+  }, []);
 
   useEffect(() => {
-    const fetchBug = async () => {
+    const fetchBugs = async () => {
       try {
-        const res = await GetBugAPI()
-        setBug(res || [])
+        const allBugs = await GetBugAPI();
+        setBugs(allBugs || []);
       } catch (err) {
-        console.log("Error fetching bug : ", err)
+        console.error(err);
       }
-    }
-    fetchBug()
-  }, [])
+    };
+    fetchBugs();
+  }, []);
 
   const handleChange = (e) => {
-  const { name, value } = e.target;
-  setformData((prev) => ({ ...prev, [name]: value }));
-};
+    const { name, value } = e.target;
+    setFormdata(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleEditorChange = (event, editor) => {
-    const data = editor.getData()
-    setformData((prev) => ({ ...prev, content: data }))
-    setValue("content", data, { shouldValidate: true })
-  }
+    const data = editor.getData();
+    setFormdata(prev => ({ ...prev, content: data }));
+    setValue("content", data, { shouldValidate: true });
+  };
 
-  const OnSubmit = () => {
-    const fetchData = async () => {
-      try {
-        const res = await NewCommentAPI(formdata)
-        console.log("Comment created", res)
-        setMessage("Comment Created !")
-        setError(false)
-        navigate('/dashboard')
-      } catch (err) {
-        console.log("Error creating comment", err)
-        setMessage("Something went wrong")
-      }
+  const onSubmit = async () => {
+    try {
+      await NewCommentAPI(formdata);
+      setMessage("Comment Created!");
+      setError(false);
+      navigate('/dashboard');
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong.");
     }
-    fetchData()
-  }
+  };
 
   useEffect(() => {
-    register("content", { required: "Content is required" })
-  }, [register])
+    register("content", { required: "Content is required" });
+  }, [register]);
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <NavBar />
-      <div className="min-h-screen mt-1 flex ">
-        <SideNav />
-        <div className="min-h-screen flex items-center justify-center px-4 w-full">
-          <div className="bg-white p-10 rounded-lg shadow-xl w-full max-w-2xl">
-            <form onSubmit={handleSubmit(OnSubmit)} className="space-y-4">
-              {error && <p>{error}</p>}
+      <div className="flex flex-1 bg-gradient-to-br from-indigo-900 via-blue-800 to-purple-800 text-white">
+
+        <div className="hidden lg:block flex-shrink-0">
+          <SideNav />
+        </div>
+
+        <main className="flex-1 flex items-center justify-center px-4 py-12 w-full">
+          <div className="bg-black/50 backdrop-blur-md rounded-2xl p-8 shadow-xl w-full max-w-2xl space-y-6">
+
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              {error && <p className="text-red-500 text-center">{error}</p>}
+              {message && <p className="text-green-500 text-center">{message}</p>}
 
               <div>
-                <label className="block text-gray-700 font-semibold mb-1">Bug </label>
-                <select
-                  type="text"
-                  name="bugId"
-                  {...register("bugId")}
-                  onChange={handleChange}
-                  placeholder="Enter bug ID"
-                  className="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-2">
+                <label className="block font-semibold mb-1">Select Bug</label>
+                <select name="bugId" value={formdata.bugId} {...register("bugId")} onChange={handleChange} className="w-full border-b-2 border-white/50 bg-black/30 text-white py-2 outline-none focus:border-indigo-400" >
                   <option value="">Select Bug</option>
-                  {bug.map((bugs) => (
-                    <option key={bugs._id} value={bugs._id}>{bugs.title}</option>
+                  {bugs.map(bug => (
+                    <option key={bug._id} value={bug._id}>{bug.title}</option>
                   ))}
                 </select>
-                {errors?.bugId && <p className="text-red-500 text-sm">{errors.bugId.message}</p>}
+                <p className="text-red-500 text-sm">{errors.bugId?.message}</p>
               </div>
 
               <div>
-                <label className="block text-gray-700 font-semibold mb-1">User ID</label>
-                <select
-                  type="text"
-                  name="to"
-                  {...register("to")}
-                  onChange={handleChange}
-                  placeholder="Enter user ID"
-                  className="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-2">
+                <label className="block font-semibold mb-1">Select User</label>
+                <select name="to" value={formdata.to} {...register("to")} onChange={handleChange} className="w-full border-b-2 border-white/50 bg-black/30 text-white py-2 outline-none focus:border-indigo-400" >
                   <option value="">Select User</option>
-                  {users.map((user) => (
+                  {users.map(user => (
                     <option key={user._id} value={user._id}>{user.name}</option>
                   ))}
                 </select>
-                {errors?.to && <p className="text-red-500 text-sm">{errors.to.message}</p>}
+                <p className="text-red-500 text-sm">{errors.to?.message}</p>
               </div>
+
               <div>
-                <label className="block text-gray-700 font-semibold mb-1">Comment</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  data={formdata.content}
-                  name="content"
-                  onChange={handleEditorChange}
-                />
+                <label className="block font-semibold mb-1">Comment</label>
+                <div className='text-black'>
+                  <CKEditor editor={ClassicEditor} data={formdata.content} onChange={handleEditorChange} />
+                </div>
+                <p className="text-red-500 text-sm">{errors.content?.message}</p>
               </div>
-              <button
-                type="submit"
-                className="w-full py-3 text-white font-semibold rounded shadow-md mt-6 transition-all duration-300 loginGradientBtn"
-              >
+              <button type="submit" className="w-full py-3 text-white font-semibold rounded shadow-md loginGradientBtn">
                 Submit Comment
               </button>
-              {message && <p>{message}</p>}
-
             </form>
           </div>
-        </div>
+        </main>
       </div>
-    </>
-  )
+    </div>
+  );
 }

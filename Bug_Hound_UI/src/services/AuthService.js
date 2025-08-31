@@ -1,11 +1,11 @@
 import axios from "axios"
 
-const BASE_URL='http://localhost:3000/BugHound/user'
+const BASE_URL='http://localhost:5000/BugHound/user'
 
 export const SignupAPI = async (AuthData) => {
     try {
       const data = new FormData();
-      for (let key in AuthData) {
+      for (let key in AuthData) { 
         data.append(key, AuthData[key]);
       }
   
@@ -14,7 +14,7 @@ export const SignupAPI = async (AuthData) => {
           'Content-Type': 'multipart/form-data',
         },
       });
-  
+   
       return res.data;
     } catch (err) {
       console.error("SignupAPI error:", err.response?.data || err.message);

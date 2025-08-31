@@ -1,5 +1,4 @@
 import React from 'react'
-import '../index.css'
 import NavBar from '../components/NavBar'
 import SideNav from '../components/SideNav'
 import BugStatusChart from '../components/BugStatusChart'
@@ -9,54 +8,57 @@ import UseAuth from '../hooks/useAuth'
 import Footer from '../components/Footer'
 
 export default function Home() {
-  const { user } = UseAuth();
+  const { user } = UseAuth()
+
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <NavBar />
-      <div className="min-h-screen mt-1 flex ">
+      <div className="flex flex-1 bg-gradient-to-br from-indigo-900 via-blue-800 to-purple-800 text-white">
         <SideNav />
-        <div className="flex-1 p-6 loginBackground">
+        <main className="flex-1 p-8 md:p-12 space-y-10 overflow-y-auto">
 
-          <div className="mb-8">
-            <h1 className="text-sm lg:text-base font-semibold lg:font-normal">
-              <div className='font-semibold'>Welcome <strong>{user.name}</strong>,</div>
-              As a valued <strong>{user.role}</strong> at Leo Technologies, we're thrilled to have you onboard. Leo Technologies is one of the most innovative and forward-thinking companies, always striving for excellence in delivering high-quality software solutions. We are proud to offer this platform, designed specifically for bug reporting, live status updates, and seamless communication among team members.
+          <section className="bg-black/50 backdrop-blur-md rounded-2xl p-8 shadow-lg">
+            <h1 className="text-4xl font-bold mb-4 text-indigo-400">
+              Welcome Back, <span className="text-white">{user.name}</span>!
             </h1>
-          </div>
+            <p className="text-white/90 text-lg leading-relaxed">
+              As a <strong>{user.role}</strong> at BugHound, you have access to real-time bug tracking, collaborative updates, and seamless communication across your team. Stay informed, stay productive.
+            </p>
+          </section>
 
-          <div className="mb-8">
+          <section className="bg-black/50 backdrop-blur-md rounded-2xl p-8 shadow-lg">
+            <h2 className="text-2xl font-semibold mb-6 text-indigo-300">Bug Status Overview</h2>
             <BugStatusChart />
-          </div>
+            <p className="mt-4 text-white/80">
+              Track bugs — open, in progress, or closed — at a glance. Testers, Developers, and Project Managers collaborate efficiently to ensure every issue is resolved promptly.
+            </p>
+          </section>
 
-          <div className="mb-8">
-            <h2 className="text-sm lg:text-base font-semibold lg:font-normal">
-              Here you can get an overview of the current bug statuses — whether they are open, in progress, or closed. Our dedicated Testers and Developers are working diligently to resolve each issue, while the Project Manager oversees progress and ensures all tasks are on track. Their collaboration ensures that bugs are handled effectively and efficiently.
-            </h2>
-          </div>
-
-          <div className="mb-8">
+          <section className="bg-black/50 backdrop-blur-md rounded-2xl p-8 shadow-lg">
+            <h2 className="text-2xl font-semibold mb-6 text-indigo-300">Bug Priorities & Conditions</h2>
             <BugCondition />
-          </div>
+            <p className="mt-4 text-white/80">
+              Testers assess criticality to prioritize urgent issues. Developers receive detailed notifications for timely resolutions. Project Managers oversee workflow and coordinate feedback efficiently.
+            </p>
+          </section>
 
-          <div className="mb-8">
-            <h2 className="text-sm lg:text-base font-semibold lg:font-light">
-              Our Testers pay special attention to the criticality of each bug. They assess and set conditions (e.g., high, critical, low) based on the bug's impact, ensuring that urgent issues are prioritized. After the Testers report the bugs, our Developers receive detailed information via email, so please provide a real email address during signup to ensure you receive timely notifications.
-            </h2>
-            <h2 className="text-sm lg:text-lg font-semibold lg:font-light">
-              The Project Manager ensures smooth coordination between Testers and Developers, managing their workflow and providing feedback about their work through comments. This keeps the entire team aligned and informed at all times.
-            </h2>
-          </div>
-          <MyEditor />
+          <section className="bg-black/50 backdrop-blur-md rounded-2xl p-8 shadow-lg">
+            <h2 className="text-2xl font-semibold mb-6 text-indigo-300">Collaboration & Comments</h2>
+            <MyEditor />
+            <p className="mt-4 text-white/80">
+              Streamline communication via comments. Keep the team aligned, track updates, and ensure that all critical bugs are handled with priority.
+            </p>
+          </section>
 
-          <div className="mb-8">
-            <h2 className="text-sm lg:text-base font-semibold lg:font-light">
-              We've enhanced this application by integrating some of the most popular and robust libraries like Chart.js, CKEditor, Yup, and TailwindCSS to offer you an optimized and efficient user experience. And of course, we ensure the highest level of security with role-based access, keeping our platform safe and tailored to each user's role and permissions.
-            </h2>
-          </div>
-
-        </div>
+          <section className="bg-black/50 backdrop-blur-md rounded-2xl p-8 shadow-lg">
+            <h2 className="text-2xl font-semibold mb-4 text-indigo-300">Optimized & Secure</h2>
+            <p className="text-white/80 text-lg leading-relaxed">
+              BugHound integrates Chart.js, CKEditor, Yup, and TailwindCSS for a smooth, efficient experience. Role-based access ensures security while providing functionality tailored to your responsibilities.
+            </p>
+          </section>
+        </main>
       </div>
       <Footer />
-    </>
+    </div>
   )
 }

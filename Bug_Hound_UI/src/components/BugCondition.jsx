@@ -53,19 +53,28 @@ export default function BugCondition() {
       title: {
         display: true,
         text: 'Bug Severity Distribution',
+        color: 'white',
         font: { size: 16 },
       },
     },
     scales: {
+      x: {
+        ticks: { color: 'white', font: { size: 12 } },
+        grid: { color: 'rgba(255,255,255,0.2)' },
+      },
       y: {
         beginAtZero: true,
-        ticks: { stepSize: 1 },
+        ticks: { color: 'white', stepSize: 1 },
+        grid: { color: 'rgba(255,255,255,0.2)' },
       },
+    },
+    layout: {
+      padding: 10,
     },
   };
 
   return (
-    <div className="w-full max-w-md h-72 mx-auto p-4 bg-white shadow-md rounded">
+    <div className="w-full max-w-md h-72 mx-auto p-4 bg-blue-900 shadow-md rounded">
       <Bar data={data} options={options} />
     </div>
   );

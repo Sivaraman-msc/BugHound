@@ -12,11 +12,7 @@ export default function DevAndTester() {
     const fetchUser = async () => {
       try {
         const res = await getUsersAPI();
-        console.log("Full user response from API:", res);
-        res.forEach(user => {
-          console.log(`User: ${user.name}, Profile: ${user.profile}`);
-        });
-        setUsers(res);
+        setUsers(res || []);
         setError(false);
       } catch (err) {
         console.error("Error fetching Users:", err);
@@ -28,67 +24,52 @@ export default function DevAndTester() {
     fetchUser();
   }, []);
 
-  if (loading) return <p className="text-center text-gray-600">Loading...</p>;
+  if (loading) return <p className="text-center text-gray-400 mt-10">Loading...</p>;
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-900 via-blue-800 to-purple-800 text-white">
       <NavBar />
-      <div className="min-h-screen mt-1 flex ">
+      <div className="flex flex-1">
         <SideNav />
-        <main className="flex-1 p-4 sm:p-6 overflow-auto">
-          {error && <p className="text-red-600 mb-4">{error}</p>}
+        <main className="flex-1 p-6 overflow-auto">
+          {error && <p className="text-red-500 mb-4">{error}</p>}
 
           <div className="sm:hidden space-y-4">
-            {users.length > 0 ? (
-              users.map(user => (
-                <div key={user._id} className="bg-white p-4 rounded shadow">
-                  {user.profile && (
-                    <img src={user.profile} alt={user.name} className="w-16 h-16 rounded-full object-cover mb-2" onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "/default-user.png"; 
-                      }}
-                    />
-                  )}
-                  <div className="mb-1 font-semibold text-lg">{user.name}</div>
-                  <div><strong>Email:</strong> {user.email}</div>
-                  <div><strong>Role:</strong> {user.role}</div>
-                </div>
-              ))
-            ) : (
-              <p className="text-center text-gray-500">Users not found</p>
+            {users.length > 0 ? users.map(user => (
+              <div key={user._id} className="bg-black/50 backdrop-blur-md p-6 rounded-2xl shadow-xl space-y-2">
+                <img src={user.profile || '/default-user.png'} alt={user.name} className="w-16 h-16 rounded-full object-cover" onError={(e) => { e.target.src = '/default-user.png'; }} />
+                <div className="font-semibold text-lg">{user.name}</div>
+                <div><strong>Email:</strong> {user.email}</div>
+                <div><strong>Role:</strong> {user.role}</div>
+              </div>
+            )) : (
+              <p className="text-center text-gray-400">Users not found</p>
             )}
-
           </div>
 
           <div className="hidden sm:block">
-            <table className="min-w-full bg-white rounded shadow overflow-hidden">
+            <table className="min-w-full bg-black/50 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden">
               <thead>
-                <tr className=" text-white bg-gray-700">
-                  <th className="text-left py-3 px-4">Profile</th>
-                  <th className="text-left py-3 px-4">Name</th>
-                  <th className="text-left py-3 px-4">Email</th>
-                  <th className="text-left py-3 px-4">Role</th>
+                <tr className="text-left text-white bg-gray-700">
+                  <th className="px-4 py-3">Profile</th>
+                  <th className="px-4 py-3">Name</th>
+                  <th className="px-4 py-3">Email</th>
+                  <th className="px-4 py-3">Role</th>
                 </tr>
               </thead>
               <tbody>
-                {users.length > 0 ? (
-                  users.map(user => (
-                    <tr key={user._id} className="border-b hover:bg-gray-50">
-                       {user.profile && (
-                    <img src={user.profile} alt={user.name} className="w-16 h-16 rounded-full object-cover mb-2" onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "/default-user.png"; 
-                      }}
-                    />
-                  )}
-                      <td className="py-3 px-4">{user.name}</td>
-                      <td className="py-3 px-4">{user.email}</td>
-                      <td className="py-3 px-4 capitalize">{user.role}</td>
-                    </tr>
-                  ))
-                ) : (
+                {users.length > 0 ? users.map(user => (
+                  <tr key={user._id} className="hover:bg-black/20">
+                    <td className="px-4 py-3">
+                      <img src={user.profile || '/default-user.png'} alt={user.name} className="w-12 h-12 rounded-full object-cover" onError={(e) => { e.target.src = '/default-user.png'; }} />
+                    </td>
+                    <td className="px-4 py-3">{user.name}</td>
+                    <td className="px-4 py-3">{user.email}</td>
+                    <td className="px-4 py-3 capitalize">{user.role}</td>
+                  </tr>
+                )) : (
                   <tr>
-                    <td colSpan="3" className="text-center py-4 text-gray-500">
+                    <td colSpan="4" className="text-center py-4 text-gray-400">
                       Users not found
                     </td>
                   </tr>
@@ -98,6 +79,6 @@ export default function DevAndTester() {
           </div>
         </main>
       </div>
-    </>
+    </div>
   );
 }

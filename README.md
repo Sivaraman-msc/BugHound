@@ -1,10 +1,10 @@
-# 🐞 BugHound - Bug Tracking Application
+#  BugHound - Bug Tracking Application
 
 BugHound is a role-based bug tracking system developed with modern web technologies. It allows testers to report bugs, developers to update statuses, and project managers to coordinate and comment efficiently.
 
 ---
 
-## 🚀 Technologies Used
+##  Technologies Used
 
 - ReactJS
 - Node.js / Express
@@ -17,7 +17,7 @@ BugHound is a role-based bug tracking system developed with modern web technolog
 
 ---
 
-## 🧩 Features
+##  Features
 
 - Role-based authentication: Tester, Developer, Project Manager
 - Bug reporting with status (`Open`, `In Progress`, `Closed`) and condition (`Critical`, `High`, `Low`)
@@ -28,6 +28,4 @@ BugHound is a role-based bug tracking system developed with modern web technolog
 - Validation with Yup and secure routing
 
 ---
-
-## 🏗 Folder Structure
 

@@ -36,7 +36,7 @@ exports.Register = async (req, res) => {
         res.status(500).json({ message: 'registration error' })
 
     }
-}
+} 
 
 exports.UpdateUser = async (req, res) => {
     try {

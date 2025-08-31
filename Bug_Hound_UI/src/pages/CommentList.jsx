@@ -34,76 +34,71 @@ export default function CommentList() {
     }
   };
 
-  if (loading) return <p className="text-gray-600 text-center">Loading comments...</p>;
+  if (loading) return <p className="text-white text-center mt-10">Loading comments...</p>;
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <NavBar />
-      <div className="flex min-h-screen">
+      <div className="flex flex-1 bg-gradient-to-br from-indigo-900 via-blue-800 to-purple-800 text-white">
         <SideNav />
-        <main className="flex-1 p-4 sm:p-6 overflow-auto">
-          {error && <p className="text-red-600 mb-4">{error}</p>}
+        <main className="flex-1 p-6 overflow-auto">
+          {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
 
           <div className="sm:hidden space-y-4">
             {comments.length > 0 ? (
-              comments.map((comment) => (
-                <div key={comment._id} className="bg-white p-4 rounded shadow">
-                  <div className="mb-2 font-semibold text-lg">{comment.bug?.title || 'N/A'}</div>
-                  <div className="mb-2 "><strong>User:</strong> {comment.user?.name || 'N/A'}</div>
-                  <div className="mb-2 "><strong>Content:</strong> {comment.content?.replace(/<[^>]+>/g, '')}</div>
-                  <button
-                    onClick={() => handleDelete(comment._id)}
-                     className="w-15 p-2 lg:w-20 mx-auto  text-white font-semibold rounded shadow-md transition-all duration-300"
-                     style={{ backgroundImage: 'linear-gradient(to right,rgb(229, 70, 70),rgb(241, 29, 29))' }}
-                  >
+              comments.map(comment => (
+                <div key={comment._id} className="bg-black/50 backdrop-blur-md p-4 rounded-2xl shadow space-y-2">
+                  <div className="font-semibold text-lg">{comment.bug?.title || 'N/A'}</div>
+                  <div><strong>User:</strong> {comment.user?.name || 'N/A'}</div>
+                  <div><strong>Content:</strong> <span dangerouslySetInnerHTML={{ __html: comment.content }} /></div>
+                  <button onClick={() => handleDelete(comment._id)} className="w-full py-2 text-white font-semibold rounded shadow-md loginGradientBtn mt-2" >
                     Delete
                   </button>
                 </div>
               ))
             ) : (
-              <p className="text-center text-gray-500">No comments available.</p>
+              <p className="text-center text-gray-300">No comments available.</p>
             )}
           </div>
 
           <div className="hidden sm:block">
-            <table className="min-w-full bg-white border rounded-md shadow-sm">
-              <thead>
-                <tr className="text-left text-sm text-white bg-gray-700">
-                  <th className="px-4 py-2 border-b">Bug</th>
-                  <th className="px-4 py-2 border-b">User</th>
-                  <th className="px-4 py-2 border-b">Content</th>
-                  <th className="px-4 py-2 border-b">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comments.length > 0 ? (
-                  comments.map((comment) => (
-                    <tr key={comment._id} className="hover:bg-gray-50">
-                      <td className="px-4 py-2 border-b">{comment.bug?.title || 'N/A'}</td>
-                      <td className="px-4 py-2 border-b">{comment.user?.name || 'N/A'}</td>
-                      <td className="px-4 py-2 border-b">{comment.content?.replace(/<[^>]+>/g, '')}</td>
-                      <td className="px-4 py-2 border-b">
-                        <button
-                          onClick={() => handleDelete(comment._id)}
-                           className="w-20 py-3 text-white font-semibold rounded shadow-md transition-all duration-300 loginGradientBtn"
-                        >
-                          Delete
-                        </button>
+            <div className="bg-black/50 backdrop-blur-md rounded-2xl p-6 shadow">
+              <table className="min-w-full text-white">
+                <thead>
+                  <tr className="border-b border-white/30">
+                    <th className="px-4 py-2 text-left">Bug</th>
+                    <th className="px-4 py-2 text-left">User</th>
+                    <th className="px-4 py-2 text-left">Content</th>
+                    <th className="px-4 py-2 text-left">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comments.length > 0 ? (
+                    comments.map(comment => (
+                      <tr key={comment._id} className="hover:bg-white/10">
+                        <td className="px-4 py-2">{comment.bug?.title || 'N/A'}</td>
+                        <td className="px-4 py-2">{comment.user?.name || 'N/A'}</td>
+                        <td className="px-4 py-2"><span dangerouslySetInnerHTML={{ __html: comment.content }} /></td>
+                        <td className="px-4 py-2">
+                          <button onClick={() => handleDelete(comment._id)} className="py-2 px-4 text-white font-semibold rounded shadow-md loginGradientBtn" >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="4" className="text-center py-4 text-gray-300">
+                        No comments available.
                       </td>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="4" className="text-center py-4 text-gray-500">
-                      No comments available.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </main>
       </div>
-    </>
+    </div>
   );
 }

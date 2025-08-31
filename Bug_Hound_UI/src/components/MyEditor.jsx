@@ -7,18 +7,18 @@ const MyEditor = () => {
 
   return (
     <>
-    <div style={{ width: "80%", margin: "auto", padding: "20px" }}>
-      <CKEditor
-        editor={ClassicEditor}
-        data={content}
-        onReady={(editor) => {
-          console.log(" CKEditor Loaded:", editor);
-        }}
-        onChange={(event, editor) => {
-          setContent(editor.getData());
-        }}
-      />
-    </div>
+      <div style={{ width: "80%", margin: "auto", padding: "20px", color: "black" }}>
+        <CKEditor
+          editor={ClassicEditor}
+          data={content}
+          onReady={(editor) => {
+            console.log(" CKEditor Loaded:", editor);
+          }}
+          onChange={(event, editor) => {
+            setContent(editor.getData());
+          }}
+        />
+      </div>
     </>
   );
 };

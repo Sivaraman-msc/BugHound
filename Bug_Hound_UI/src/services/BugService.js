@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL='http://localhost:3000/BugHound/bug'
+const BASE_URL='http://localhost:5000/BugHound/bug'
 
 
 export const CreateBugAPI = async (bugData) => {

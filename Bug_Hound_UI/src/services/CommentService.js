@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASE_URL='http://localhost:3000/BugHound/Comment'
+const BASE_URL='http://localhost:5000/BugHound/Comment'
 
 export const NewCommentAPI = async (CommentData) => {
     try {

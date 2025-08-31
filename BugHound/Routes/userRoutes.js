@@ -13,4 +13,4 @@ router.put('/updateUser/:id', uploadImage.single('profile'), ValidateUpdateUser,
 router.get('/getUsers',Auth ,AuthorizeRole('Tester','ProjectManager'),GetAllUsers)
 router.get('/getuserbyid/:id',Auth,AuthorizeRole('ProjectManager'),GetUserById)
 
-module.exports=router
+module.exports=router 

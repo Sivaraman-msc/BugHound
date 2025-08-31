@@ -35,7 +35,7 @@ export default function BugStatusChart() {
       {
         label: 'Bug Count',
         data: [bugCount.bugs, bugCount.open, bugCount.inProgress, bugCount.closed],
-        backgroundColor: ['#6366f1', '#3b82f6', '#facc15', '#10b981'],
+        backgroundColor: ['red', 'green', '#facc15', 'pink'],
         barThickness: 34,
       },
     ],
@@ -48,22 +48,31 @@ export default function BugStatusChart() {
       legend: { display: false },
       title: {
         display: true,
-        text: 'Bug Status ',
+        text: 'Bug Status',
+        color: 'white',
         font: { size: 16 },
+      },
+      tooltip: {
+        bodyColor: 'white',
+        titleColor: 'white',
+        backgroundColor: 'rgba(0,0,0,0.7)',
       },
     },
     scales: {
+      x: {
+        ticks: { color: 'white', font: { size: 12 } },
+        grid: { color: 'rgba(255,255,255,0.2)' },
+      },
       y: {
         beginAtZero: true,
-        ticks: {
-          stepSize: 1,
-        },
+        ticks: { color: 'white', stepSize: 1 },
+        grid: { color: 'rgba(255,255,255,0.2)' },
       },
     },
   };
 
   return (
-    <div className="w-full max-w-md h-72 mx-auto p-4 bg-white shadow-md rounded">
+    <div className="w-full max-w-md h-72 mx-auto p-4 bg-blue-900 shadow-md rounded">
       <Bar data={data} options={options} />
     </div>
   );

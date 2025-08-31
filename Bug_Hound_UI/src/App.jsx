@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import './App.css'
 import './index.css'
-import {BrowserRouter, Routes,Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AuthProvider from './context/AuthProvider';
 import { Protectedroute } from './routes/ProtectedRoute';
 import Home from './pages/Home';
@@ -19,7 +19,7 @@ import Help from './pages/Help';
 function App() {
 
   useEffect(() => {
-    fetch('http://localhost:3000/test')  
+    fetch('http://localhost:5000/test')
       .then(res => res.json())
       .then(data => console.log(data))
       .catch(err => console.error('Error connecting:', err));
@@ -27,43 +27,43 @@ function App() {
 
   return (
     <>
-    <AuthProvider>
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Login />} />
-      <Route path='/signup' element={<SignUp />} />
-      <Route path='/help' element={<Help />} />
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/help' element={<Help />} />
 
-      <Route element={<Protectedroute />}>
-      <Route path='/dashboard' element={<Home />} />
+            <Route element={<Protectedroute />}>
+              <Route path='/dashboard' element={<Home />} />
 
-      <Route element={<RolebasedRoute allowedRoute={['Tester']} />}>
-      <Route path='/bugreport' element={<BugForm />} />
-      </Route>
+              <Route element={<RolebasedRoute allowedRoute={['Tester']} />}>
+                <Route path='/bugreport' element={<BugForm />} />
+              </Route>
 
-      <Route element={<RolebasedRoute allowedRoute={['Developer','ProjectManager']} />}>
-      <Route path='/bugList' element={<BugList />} />
-      </Route>
+              <Route element={<RolebasedRoute allowedRoute={['Developer', 'ProjectManager']} />}>
+                <Route path='/bugList' element={<BugList />} />
+              </Route>
 
-      <Route element={<RolebasedRoute allowedRoute={['Developer']} />}>
-      <Route path='/bugUpdate/:id' element={<BugUpdate />} />
-      </Route>
+              <Route element={<RolebasedRoute allowedRoute={['Developer']} />}>
+                <Route path='/bugUpdate/:id' element={<BugUpdate />} />
+              </Route>
 
-      <Route element={<RolebasedRoute allowedRoute={['ProjectManager']} />}>
-      <Route path='/createComment' element={<Comment /> } />
-      </Route>
+              <Route element={<RolebasedRoute allowedRoute={['ProjectManager']} />}>
+                <Route path='/createComment' element={<Comment />} />
+              </Route>
 
-      <Route element={<RolebasedRoute allowedRoute={['ProjectManager']} />}>
-      <Route path='/employees' element={<DevAndTester /> } />
-      </Route>
+              <Route element={<RolebasedRoute allowedRoute={['ProjectManager']} />}>
+                <Route path='/employees' element={<DevAndTester />} />
+              </Route>
 
-      <Route path='/commentList' element={<CommentList />} />
+              <Route path='/commentList' element={<CommentList />} />
 
-      <Route path='/help' element={<Help />} /> 
-      </Route>
-    </Routes>
-    </BrowserRouter>
-    </AuthProvider>
+              <Route path='/help' element={<Help />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </>
   );
 }
