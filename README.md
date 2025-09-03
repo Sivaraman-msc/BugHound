@@ -65,8 +65,11 @@ npm run seed
 npm start
 
 # Open a new terminal, install frontend dependencies
+
+>**Note:** We’ve removed strict mode because of CKEditor, so you need to use `--force` when installing.
+
 cd Bug_Hound_UI
-npm install
+npm install --force
 
 # Start the frontend development server
 npm run dev
