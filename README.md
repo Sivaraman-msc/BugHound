@@ -30,6 +30,8 @@ BugHound is a role-based bug tracking system developed with modern web technolog
 ---
 
 ## Data
+cd BugHound 
+npm run seed 
 
 Role : Tester   - email :  	 siva@gmail.com  - password : 12345678
 	
