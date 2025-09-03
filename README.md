@@ -29,3 +29,45 @@ BugHound is a role-based bug tracking system developed with modern web technolog
 
 ---
 
+## Data
+
+Role	      Email	          Password
+Tester     	 siva@gmail.com   12345678
+	
+Developer	angelina@gmail.com 12345678
+	
+ProjectManager	ram@gmail.com  12345678
+	
+
+----
+
+## Quick Start
+
+Run these commands to quickly set up and start the project:
+
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd CodeSieve
+
+# Install backend dependencies
+cd BugHound
+npm install
+
+# Seed the database with initial data
+npm run seed
+
+# Start the backend server
+npm start
+
+# Open a new terminal, install frontend dependencies
+cd Bug_Hound_UI
+npm install
+
+# Start the frontend development server
+npm run dev
+
+Test Accounts (Pre-seeded Users)
+
+You can use these accounts to log in immediately:
+
