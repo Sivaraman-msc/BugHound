@@ -31,12 +31,11 @@ BugHound is a role-based bug tracking system developed with modern web technolog
 
 ## Data
 
-Role	      Email	          Password
-Tester     	 siva@gmail.com   12345678
+Role : Tester   - email :  	 siva@gmail.com  - password : 12345678
 	
-Developer	angelina@gmail.com 12345678
+Role : Developer - email : 	angelina@gmail.com - password : 12345678
 	
-ProjectManager	ram@gmail.com  12345678
+Role : ProjectManager- email :	ram@gmail.com - password : 12345678
 	
 
 ----
@@ -66,8 +65,3 @@ npm install
 
 # Start the frontend development server
 npm run dev
-
-Test Accounts (Pre-seeded Users)
-
-You can use these accounts to log in immediately:
-
