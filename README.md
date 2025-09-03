@@ -49,11 +49,14 @@ Run these commands to quickly set up and start the project:
 ```bash
 # Clone the repository
 git clone <your-repo-url>
-cd CodeSieve
+cd BugHound 
 
 # Install backend dependencies
+
+>**Note:** We’ve removed strict mode because of CKEditor, so you need to use `--force` when installing.
+
 cd BugHound
-npm install
+npm install --force 
 
 # Seed the database with initial data
 npm run seed
@@ -67,3 +70,20 @@ npm install
 
 # Start the frontend development server
 npm run dev
+
+
+---
+
+## Environment Setup
+
+Create a `.env` file inside the **CodeSieve-Backend** folder with the following keys:
+
+```env
+PORT=5000
+MONGO_URI=your_mongo_connection_string
+JWT_KEY=your_secret_key
+EMAIL_USER=your_email@example.com
+EMAIL_PASS=your_email_password
+CLOUD_NAME=dotudwq8w
+CLOUD_API_KEY=499966814948442
+CLOUD_API_SECRET=gbR3nu3cWkExDm-pcx4QAAzjnLM
